@@ -10,14 +10,14 @@ from setuptools import find_packages, setup
 
 
 setup(
-    name="django-s3-backup-tracker",
+    name="django-s3_backup_tracker",
     version="0.0.1",
     author="Travis Bock",
     author_email="tbock@innovateteam.com",
     license="MIT",
     description="Move and track DB backups to offsite locations",
     url="https://github.com/Innovate-Inc/django-s3-backup-tracker",
-    packages=['s3-backup-tracker', 's3-backup-tracker.migrations', 's3-backup-tracker.management.commands'],
+    packages=['s3_backup_tracker', 's3_backup_tracker.migrations', 's3_backup_tracker.management.commands'],
     install_requires=['django-storages'],
     classifiers=[
         "Programming Language :: Python :: 3",

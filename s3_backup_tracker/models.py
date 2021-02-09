@@ -17,10 +17,15 @@ class BackupLocation(models.Model):
 class Backups(models.Model):
     location = models.ForeignKey('BackupLocation', on_delete=models.CASCADE)
     archived = models.BooleanField('Archived (Do Not Delete from AWS)', default=False)
-    file = models.FileField(max_length=255, storage=S3Boto3Storage())
+    file = models.FileField(max_length=255, storage=S3Boto3Storage(location='backups'))
     glacier_archive_id = models.CharField(max_length=500, blank=True, null=True)
     off_site_backup_date = models.DateTimeField(blank=True, null=True)
     last_seen_date = models.DateTimeField()
+
+    # delete s3 file when model record is deleted
+    def delete(self, *args, **kwargs):
+        self.file.delete()
+        super().delete(*args, **kwargs)
 
     # keeping in case we need to support s3 and glacier
     # def backup_to_aws_glacier(self):
